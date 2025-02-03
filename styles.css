@@ -1,0 +1,424 @@
+*
+/* General Body Styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0d0d0d;
+  color: white;
+  line-height: 1.6;
+  cursor: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"%3E%3Ccircle cx="12" cy="12" r="10" fill="%23ff6200" /%3E%3C/svg%3E'), auto;
+
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Header & Navigation */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(15, 15, 15, 0.8);
+  padding: 15px 0;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+header nav ul li a:hover {
+  color: #ff6200;
+  background: rgba(255, 98, 0, 0.2);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Particles Container */
+#particles-js {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Ensure hero content stays above particles */
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Heading Styles */
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 0;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.hero button {
+  background: linear-gradient(45deg, #00adb5, #393e46);
+  color: #fff;
+  padding: 15px 35px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+}
+
+.hero button:hover {
+  background: linear-gradient(45deg, #393e46, #00adb5);
+  transform: scale(1.1);
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Section Styling */
+.section {
+  padding: 80px 20px;
+  margin: 50px 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* About Section - Upgraded */
+.about {
+  position: relative;
+  overflow: hidden;
+  background: rgba(31, 31, 31, 0.7); /* Semi-transparent background */
+  padding: 60px;
+  border-radius: 15px;
+  width: 80%;
+ height: auto;
+ margin: auto;
+  backdrop-filter: blur(10px); /* Glassmorphism effect */
+  box-shadow: 0 4px 15px rgba(255, 98, 0, 0.3); /* Soft glow */
+  transition: all 0.4s ease-in-out;
+}
+
+/* New Animated Background for About */
+.about-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(135deg, #ff6200, #1f1f1f, #393e46);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* About Content */
+.about-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* Heading with Neon Glow */
+.about h2 {
+  font-size: 2.8rem;
+  color: #ff6200;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 0px 0px 10px rgba(255, 98, 0, 0.8);
+}
+
+/* Paragraph Styling */
+.about p {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #ddd;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* List Style */
+.about ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about li {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #ddd;
+}
+
+/* Links with Hover Effect */
+.about a {
+  color: #ff6200;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+
+.about a:hover {
+  color: #ffa500;
+  text-shadow: 0px 0px 12px rgba(255, 165, 0, 0.8);
+}
+
+/* Hover Effect for the Entire About Section */
+.about:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(255, 98, 0, 0.5);
+}
+
+/* Projects Section */
+.projects {
+  position: relative;
+  text-align: center;
+  padding: 80px 20px;
+  color: white;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 1s ease-in-out;
+}
+
+.project-cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 2;
+}
+
+.project-card {
+  background-color: #222;
+  border-radius: 12px;
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(255, 98, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(255, 98, 0, 0.5);
+}
+
+.project-media {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 250px;
+}
+
+.project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.video-container {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: bottom 0.4s ease-in-out;
+}
+
+.project-card:hover .video-container {
+  bottom: 0;
+}
+
+.project-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.project-card:hover .project-image {
+  opacity: 0;
+}
+
+.project-card:hover .project-video {
+  opacity: 1;
+}
+
+/* Vanta.NET Background for Projects Section */
+#vanta-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+/* Contact Section */
+.contact {
+  position: relative;
+  text-align: center;
+  background-color: #222;
+  padding: 60px 20px;
+  border-radius: 15px;
+}
+
+/* New Animated Background for Contact */
+.contact-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: linear-gradient(135deg, #393e46, #ff6200, #222);
+  background-size: 400% 400%;
+  animation: gradientShiftContact 12s ease infinite;
+}
+
+@keyframes gradientShiftContact {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.contact h2 {
+  font-size: 2.5rem;
+  color: #ff6200;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.contact p {
+  font-size: 1.3rem;
+  color: #ccc;
+  position: relative;
+  z-index: 1;
+}
+
+.contact a {
+  text-decoration: none;
+  color: #ff6200;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.contact a:hover {
+  color: #e55300;
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #111;
+  font-size: 1rem;
+}
+
+footer a {
+  color: #ff6200;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #e55300;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1.2rem;
+  }
+  .hero button {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+  .about h2,
+  .contact h2 {
+    font-size: 2rem;
+  }
+  .about p,
+  .contact p {
+    font-size: 1rem;
+  }
+  .project-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
