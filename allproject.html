@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Projects - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #0a0a0a;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .card-hover:hover {
+        transform: translateY(-10px);
+        border-color: rgba(102, 126, 234, 0.5);
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+      }
+
+      .tech-tag {
+        background: rgba(102, 126, 234, 0.1);
+        border: 1px solid rgba(102, 126, 234, 0.3);
+        color: #667eea;
+        transition: all 0.2s ease;
+      }
+
+      .tech-tag:hover {
+        background: rgba(102, 126, 234, 0.2);
+        transform: scale(1.05);
+      }
+
+      .filter-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        transition: all 0.3s ease;
+      }
+
+      .filter-btn:hover {
+        background: rgba(102, 126, 234, 0.2);
+        border-color: rgba(102, 126, 234, 0.5);
+      }
+
+      .filter-btn.active {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: transparent;
+      }
+
+      .modal-backdrop {
+        backdrop-filter: blur(10px);
+        background: rgba(0, 0, 0, 0.8);
+      }
+
+      .modal-content {
+        background: #1a1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .project-icon {
+        background: rgba(102, 126, 234, 0.1);
+        border: 1px solid rgba(102, 126, 234, 0.3);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .section-title {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .back-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .back-btn:hover {
+        background: rgba(102, 126, 234, 0.1);
+        border-color: rgba(102, 126, 234, 0.3);
+      }
+
+      .project-category {
+        color: #667eea;
+        font-weight: 500;
+      }
+
+      .feature-item {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: all 0.2s ease;
+      }
+
+      .feature-item:hover {
+        background: rgba(102, 126, 234, 0.05);
+        border-color: rgba(102, 126, 234, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-40 backdrop-blur-md bg-black/50 border-b border-white/10"
+    >
+      <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between">
+          <button
+            onclick="goBack()"
+            class="back-btn flex items-center px-4 py-2 rounded-lg text-white"
+          >
+            <svg
+              class="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              ></path>
+            </svg>
+            Back to Home
+          </button>
+          <h1 class="text-3xl font-bold section-title">All Projects</h1>
+          <div class="w-32"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-screen py-12">
+      <!-- Filter Section -->
+      <section class="max-w-7xl mx-auto px-6 mb-12">
+        <div class="flex flex-wrap gap-4 justify-center">
+          <button
+            onclick="filterProjects('all')"
+            class="filter-btn active px-6 py-3 rounded-full font-medium"
+          >
+            All Projects
+          </button>
+          <button
+            onclick="filterProjects('web')"
+            class="filter-btn px-6 py-3 rounded-full font-medium"
+          >
+            Web Development
+          </button>
+          <button
+            onclick="filterProjects('mobile')"
+            class="filter-btn px-6 py-3 rounded-full font-medium"
+          >
+            Mobile Apps
+          </button> 
+        </div>
+      </section>
+
+      <!-- Projects Grid -->
+      <!-- Projects Grid -->
+      <section class="max-w-7xl mx-auto px-6">
+        <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+          <!-- Project 1: Indian Fresh Market -->
+          <div
+            class="card-hover bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer"
+            data-category="web"
+            onclick="openProjectModal(1)"
+          >
+          <div class="project-icon h-48 flex items-center justify-center">
+            <!-- Use local image from assets folder -->
+            <img
+              src="./images/indianfreshamrket.png" 
+              alt="Restaurant App"
+              class="h-full w-full object-cover rounded-t-2xl"
+            />
+          </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-white mb-3">Indian Fresh Market</h3>
+              <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                Full-stack e-commerce platform for groceries, spices, and more.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">React</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">Node.js</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">MongoDB</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="project-category text-sm">Web Development</span>
+                <span class="text-blue-400 hover:text-blue-300 transition-colors text-sm">View Details →</span>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Project 2: Restaurant App -->
+          <div
+            class="card-hover bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer"
+            data-category="web"
+            onclick="openProjectModal(2)"
+          >
+          <div class="project-icon h-48 flex items-center justify-center">
+            <!-- Use local image from assets folder -->
+            <img
+              src="./images/restaurant.png" 
+              alt="Restaurant App"
+              class="h-full w-full object-cover rounded-t-2xl"
+            />
+          </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-white mb-3">Restaurant App</h3>
+              <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                Mobile-first restaurant web app with menu, ordering, and PWA support.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">HTML</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">Node.js</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">PWA</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="project-category text-sm">Web Development</span>
+                <span class="text-blue-400 hover:text-blue-300 transition-colors text-sm">View Details →</span>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Project 3: TravelSphere -->
+          <div
+            class="card-hover bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer"
+            data-category="mobile"
+            onclick="openProjectModal(3)"
+          >
+          <div class="project-icon h-48 flex items-center justify-center">
+            <!-- Use local image from assets folder -->
+            <img
+              src="./images/TravelSphere.png"
+              alt="Restaurant App"
+              class="h-full w-full object-cover rounded-t-2xl"
+            />
+          </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-white mb-3">TravelSphere</h3>
+              <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                Cross-platform travel app with destinations, weather, and reviews.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">React Native</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">Firebase</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">OpenWeather API</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="project-category text-sm">Mobile App</span>
+                <span class="text-blue-400 hover:text-blue-300 transition-colors text-sm">View Details →</span>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Project 4: Florist App -->
+          <div
+            class="card-hover bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer"
+            data-category="web"
+            onclick="openProjectModal(4)"
+          >
+          <div class="project-icon h-48 flex items-center justify-center">
+            <!-- Use local image from assets folder -->
+            <img
+              src="./images/florist.png"
+              alt="Restaurant App"
+              class="h-full w-full object-cover rounded-t-2xl"
+            />
+          </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-white mb-3">Florist App</h3>
+              <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                UI/UX focused florist website with responsive front-end design.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">HTML</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">CSS</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">JavaScript</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="project-category text-sm">Web Development</span>
+                <span class="text-blue-400 hover:text-blue-300 transition-colors text-sm">View Details →</span>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Project 5: Bath & Beauty -->
+          <div
+            class="card-hover bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer"
+            data-category="web"
+            onclick="openProjectModal(5)"
+          >
+          <div class="project-icon h-48 flex items-center justify-center">
+            <!-- Use local image from assets folder -->
+            <img
+              src="./images/body&bath.png"
+              alt="Restaurant App"
+              class="h-full w-full object-cover rounded-t-2xl"
+            />
+          </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-white mb-3">Bath & Beauty Works</h3>
+              <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                Mobile-responsive complete clone of Bath & Body Works website.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">React</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">Firebase</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">Tailwind CSS</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="project-category text-sm">Web Development</span>
+                <span class="text-blue-400 hover:text-blue-300 transition-colors text-sm">View Details →</span>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Project 6: Music App -->
+          <div
+            class="card-hover bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer"
+            data-category="web"
+            onclick="openProjectModal(6)"
+          >
+          <div class="project-icon h-48 flex items-center justify-center">
+            <!-- Use local image from assets folder -->
+            <img
+              src="./images/musicApp.png"
+              alt="Restaurant App"
+              class="h-full w-full object-cover rounded-t-2xl"
+            />
+          </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-white mb-3">Music App</h3>
+              <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                Spotify-inspired web music player as a PWA with install support.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">HTML</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">CSS</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">JavaScript</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="project-category text-sm">Web Development</span>
+                <span class="text-blue-400 hover:text-blue-300 transition-colors text-sm">View Details →</span>
+              </div>
+            </div>
+          </div>
+      
+          <!-- Project 7: Emco Clone -->
+          <div
+            class="card-hover bg-gray-900/50 backdrop-blur-sm rounded-2xl overflow-hidden cursor-pointer"
+            data-category="web"
+            onclick="openProjectModal(7)"
+          >
+          <div class="project-icon h-48 flex items-center justify-center">
+            <!-- Use local image from assets folder -->
+            <img
+              src="./images/emco.png"
+              alt="Restaurant App"
+              class="h-full w-full object-cover rounded-t-2xl"
+            />
+          </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-white mb-3">Emco Clone</h3>
+              <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                Pixel-perfect clone of the Emco Corporation website with responsive UI.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">HTML</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">CSS</span>
+                <span class="tech-tag px-3 py-1 text-xs rounded-full">JavaScript</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="project-category text-sm">Web Development</span>
+                <span class="text-blue-400 hover:text-blue-300 transition-colors text-sm">View Details →</span>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </section>
+      
+    </main>
+
+    <!-- Project Detail Modal -->
+    <div
+      id="projectModal"
+      class="fixed inset-0 modal-backdrop hidden z-50 flex items-center justify-center p-4"
+    >
+      <div
+        class="modal-content rounded-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div
+          class="sticky top-0 bg-gray-900/95 backdrop-blur-md border-b border-white/10 p-6 flex items-center justify-between"
+        >
+          <h2 id="modalTitle" class="text-2xl font-bold text-white"></h2>
+          <button
+            onclick="closeProjectModal()"
+            class="text-gray-400 hover:text-white transition-colors p-2"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="p-6">
+          <div
+            id="modalImage"
+            class="project-icon h-64 rounded-xl mb-8 flex items-center justify-center"
+          >
+            <!-- Dynamic content -->
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-lg font-semibold text-white mb-4">
+                Project Overview
+              </h3>
+              <p
+                id="modalDescription"
+                class="text-gray-400 mb-6 leading-relaxed"
+              ></p>
+
+              <h3 class="text-lg font-semibold text-white mb-4">
+                Key Features
+              </h3>
+              <div id="modalFeatures" class="space-y-3 mb-6">
+                <!-- Dynamic content -->
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-white mb-4">
+                Technologies Used
+              </h3>
+              <div id="modalTechnologies" class="flex flex-wrap gap-2 mb-6">
+                <!-- Dynamic content -->
+              </div>
+              <div id="modalDetails" class="space-y-3 mb-8">
+                <!-- Dynamic content -->
+              </div>
+
+              <div class="flex gap-4">
+                <a
+                  id="liveDemoBtn"
+                  href="#"
+                  target="_blank"
+                  class="btn-primary flex-1 text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center"
+                >
+                  <svg
+                    class="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    ></path>
+                  </svg>
+                  Live Demo
+                </a>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Project data
+      const projects = {
+    1: {
+        title: "Indian Fresh Market — Full-Stack E-Commerce Platform",
+        description:
+            "A comprehensive full-stack e-commerce solution replicating Indian Fresh Market, providing a seamless shopping experience for groceries, spices, and more. Built with modern web technologies, including PWA features for installability and offline support.",
+        image:"./images/indianfreshamrket.png",
+        video:"./images/indian.mp4",
+            technologies: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "React",
+            "Node.js",
+            "Express.js",
+            "MongoDB",
+            "JWT Authentication",
+            "Stripe API",
+            "PWA"
+        ],
+        features: [
+            "Secure user authentication and registration",
+            "Dynamic product catalog with categories (groceries, spices, pooja items)",
+            "Shopping cart, wishlist, and order management",
+            "Admin dashboard for inventory and order management",
+            "Stripe payment gateway integration",
+            "Responsive design for all devices",
+            "Progressive Web App (installable on Android & iOS with offline support)"
+        ],
+        liveDemoUrl: "https://indianfreshmarket.com"
+    },
+    2: {
+        title: "Restaurant App — HTML/CSS, Node.js, PWA with Notifications",
+        description: "A mobile-first restaurant web app built with HTML and CSS on the front end and Node.js/Express on the back end. It’s a full Progressive Web App (PWA) with a complete web app manifest and service worker for offline caching, background sync, and installability. Supports web push notifications and is installable on both iOS and Android.",
+        image: "./images/restaurant.png",
+        video: "./images/Restaurant.mp4",
+        technologies: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Node.js",
+            "Express",
+            "Service Worker",
+            "Web App Manifest",
+            "Web Push Notifications",
+            "PWA"
+        ],
+        features: [
+            "Installable PWA (Add to Home Screen) for iOS and Android",
+            "Service worker for offline support and caching",
+            "Web push notifications (order updates, promos)",
+            "Responsive, mobile-first UI",
+            "Menu browsing with categories and search",
+            "Cart and checkout flow",
+            "Order status tracking",
+            "SEO-friendly metadata and manifest"
+        ],
+        liveDemoUrl: "https://restaurant-app-one-ecru.vercel.app"
+    },
+    3: {
+        title: "TravelSphere — Cross-Platform Travel App",
+        description:
+            "A React Native mobile application that helps users explore destinations, view travel details, check weather forecasts, and manage personalized travel plans. The app integrates Firebase for authentication and data storage, OpenWeatherMap API for live weather updates, and Google Maps Static API for destination maps.",
+        image:"./images/TravelSphere.png",
+            technologies: [
+            "React Native",
+            "Firebase",
+            "OpenWeatherMap API",
+            "Google Maps Static API",
+            "Expo",
+            "React Navigation"
+        ],
+        features: [
+            "Secure authentication and profile management",
+            "Browse destinations with images, descriptions, and attractions",
+            "Search, filter, and sort destinations with personalized recommendations",
+            "Weather forecasts and static maps integrated via APIs",
+            "Favorites, reviews, ratings, and travel checklists",
+            "Installable cross-platform PWA with offline support"
+        ],
+        liveDemoUrl: "https://github.com/Harpreet-kaur786/TravelSphere"
+    },
+    4: {
+        title: "Florist App — UI/UX Design & Front-End",
+        description:
+            "A beautifully designed florist website created from scratch, showcasing the complete UI/UX design process. Starting with wireframes and prototypes, the project was transformed into a responsive front-end website built using HTML, CSS, and JavaScript. The focus is on elegant design, usability, and modern layout techniques.",
+        image:"./images/florist.png",
+        video: "./images/floristWebsite-2.mp4",
+            technologies: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Wireframing",
+            "Prototyping",
+            "Responsive Design"
+        ],
+        features: [
+            "Designed complete UI/UX flow with wireframes and prototypes",
+            "Custom responsive front-end layout",
+            "Modern floral-inspired color palette and typography",
+            "Interactive elements using JavaScript",
+            "Focus on aesthetics, usability, and design principles"
+        ],
+        liveDemoUrl: "https://florist-app-one.vercel.app"
+    },
+    5: {
+        title: "Bath & Beauty App — Responsive Clone",
+        description:
+            "A mobile-responsive clone of Bath & Body Works website, built to showcase front-end design and layout skills. The project replicates the official site's UI/UX, interactive elements, and product browsing experience using HTML, CSS, and JavaScript.",
+            image:"./images/body&bath.png",
+            video:"images/bodybath.mp4",
+            technologies: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Responsive Design",
+            "UI/UX Design"
+        ],
+        features: [
+            "Mobile-responsive front-end clone",
+            "Replicated UI/UX and interactive components",
+            "Product browsing layout with categories",
+            "Focus on modern design, typography, and spacing"
+        ],
+        liveDemoUrl: "https://github.com/Harpreet-kaur786/Bath-and-Beauty-website"
+    },
+    6: {
+        title: "Music App — Spotify-Inspired PWA",
+        description:
+            "A Spotify-themed Progressive Web App (PWA) built with HTML, CSS, and JavaScript. The app features demo playlists and a custom player interface to showcase UI/UX skills. While it does not stream real audio, it includes full PWA functionality with a manifest and service worker, making it installable on both Android and iOS devices.",
+            image: "./images/musicApp.png",
+            video:"./images/musicApp.mp4",
+            technologies: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "PWA",
+            "Service Worker",
+            "Web App Manifest",
+            "Responsive Design"
+        ],
+        features: [
+            "Spotify-inspired UI with playlists and player interface",
+            "Installable PWA with manifest and service worker",
+            "Works on both Android and iOS (browser + standalone mode)",
+            "Offline-ready with caching support",
+            "Demo music listings (no audio playback or APIs)",
+            "Responsive front-end with modern UI/UX design"
+        ],
+        liveDemoUrl: "https://music-app-ochre-nine.vercel.app"
+    },
+    7: {
+        title: "Emco Corporation Website Clone",
+        description:
+            "A pixel-perfect clone of the official Emco Corporation website, created as a course project to demonstrate web design and front-end development skills. The project focuses on responsive layouts, clean UI/UX design, and cross-browser compatibility.",
+        image: "./images/emco.png",
+        video: "./images/emco.mp4",
+            technologies: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "Responsive Design",
+            "Cross-Browser Compatibility"
+        ],
+        features: [
+            "Complete front-end clone of Emco Corporation's website",
+            "Responsive and mobile-friendly design",
+            "Pixel-perfect UI with attention to typography and spacing",
+            "Navigation, layouts, and interactive components replicated",
+            "Demonstrates proficiency in web design and development"
+        ],
+        liveDemoUrl: "https://emco-clone.vercel.app"
+    }
+};
+
+
+      // Filter functionality
+      function filterProjects(category) {
+        const cards = document.querySelectorAll("[data-category]");
+        const buttons = document.querySelectorAll(".filter-btn");
+
+        // Update active button
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
+
+        // Filter cards with animation
+        cards.forEach((card) => {
+          if (category === "all" || card.dataset.category === category) {
+            card.style.display = "block";
+            setTimeout(() => {
+              card.style.opacity = "1";
+              card.style.transform = "scale(1)";
+            }, 100);
+          } else {
+            card.style.opacity = "0";
+            card.style.transform = "scale(0.8)";
+            setTimeout(() => {
+              card.style.display = "none";
+            }, 300);
+          }
+        });
+      }
+
+      // Modal functionality
+      function openProjectModal(projectId) {
+        const project = projects[projectId];
+        const modal = document.getElementById("projectModal");
+
+        // Update modal content
+        document.getElementById("modalTitle").textContent = project.title;
+        document.getElementById("modalDescription").textContent =
+          project.description;
+
+        // Update image/icon
+        const modalImage = document.getElementById("modalImage");
+        modalImage.innerHTML = `
+  <video 
+    src="${project.video}" 
+    class="h-full w-full object-cover rounded-xl" 
+    autoplay 
+    muted 
+    loop 
+    playsinline
+  ></video>
+`;
+
+        // Update features
+        const featuresList = document.getElementById("modalFeatures");
+        featuresList.innerHTML = project.features
+          .map(
+            (feature) =>
+              `<div class="feature-item flex items-start p-3 rounded-lg">
+            <svg class="w-5 h-5 text-blue-400 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-gray-300">${feature}</span>
+        </div>`
+          )
+          .join("");
+
+        // Update technologies
+        const techContainer = document.getElementById("modalTechnologies");
+        techContainer.innerHTML = project.technologies
+          .map(
+            (tech) =>
+              `<span class="tech-tag px-3 py-1 text-sm rounded-full">${tech}</span>`
+          )
+          .join("");
+
+
+        // Set Live Demo button link dynamically
+        const liveDemoBtn = document.getElementById("liveDemoBtn");
+        liveDemoBtn.href = project.liveDemoUrl || "#"; // fallback to '#' if no link provided
+
+        // Show modal
+        modal.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeProjectModal() {
+        const modal = document.getElementById("projectModal");
+        modal.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // Close modal on backdrop click
+      document
+        .getElementById("projectModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) {
+            closeProjectModal();
+          }
+        });
+
+      // Back button functionality
+      function goBack() {
+        window.location.href = "index.html";
+      }
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeProjectModal();
+        }
+      });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'96c8fa2692fc2659',t:'MTc1NDc2MDU4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
